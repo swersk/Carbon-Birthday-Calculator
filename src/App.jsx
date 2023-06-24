@@ -6,17 +6,8 @@ import Papa from 'papaparse';
 
 const App = () => {
 
-  const [carData, setCarData] = useState([]);
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-  const [avg, setAvg] = useState('');
-
 
 useEffect(() => {
-  // fetch('../public/data.csv')
-      // .then((res) => res.text())
-      // .then((res) => console.log(res))
-
   const carbonData = `Month,Year,Average
   3,1958,314.43
   4,1958,315.16
@@ -802,11 +793,9 @@ useEffect(() => {
   4,2023,420.65
   5,2023,420.57`;
 
-
   Papa.parse(carbonData, {
     header: true,
     complete: function (results) {
-      console.log('results', results.data)
       setCarData(results.data)
       // console.log('carDataMonth', carData[0].Month)
       // console.log('carDataYear', carData[0].Year)
@@ -815,10 +804,15 @@ useEffect(() => {
     });
 }, []);
 
+const [carData, setCarData] = useState([]);
+const [month, setMonth] = useState('');
+const [year, setYear] = useState('');
+const [avg, setAvg] = useState(null);
+
 let months = ['January', 'February', 'March', 'April', 'May', 'June',
   'July', 'August', 'September', 'October', 'November', 'December'];
 
-let startYear = 1958;
+let startYear = 1959;
 let endYear = 2023;
 
 let years = [];
@@ -828,24 +822,31 @@ for (let i = startYear; i <= endYear; i++) {
 
 const handleMonthClick = (e) => {
   e.preventDefault();
-  console.log('month', e.target.value)
+  console.log('month in dropdown:', e.target.value)
   setMonth(e.target.value)
 }
 
 const handleYearClick = (e) => {
   e.preventDefault();
-  console.log('e.target.value', e.target.value)
   setYear(e.target.value)
 }
 
-const setAverage = (month,year) => {
-for (let i = 0; i < carData.length; i++) {
-  if (carData[i].Month === month && carData[i].Year === year) {
-    setAvg(carData[i].Average)
-    console.log('avg', avg)
-    break;
-  }
- }
+const handleAvgClick = (event) => {
+  for (let i = 0; i < carData.length; i++) {
+    if (month === '' || year === '') {
+    alert('Please complete the drop-down items');
+    return;
+    } else {
+      let newMonth = months.indexOf(Number(carData[i].Month) + 1)
+      setYear(Number(year))
+      if (Number(carData[i].Year) === year &&
+         Number(carData[i].Month) === month) {
+         setAvg(Number(carData[i].Average))
+         break;
+          }
+      break;
+     }
+    }
 }
 
   return (
@@ -868,16 +869,11 @@ for (let i = 0; i < carData.length; i++) {
                 ))}
              </select>
         </div>
+        <button onClick={handleAvgClick}>Find out!</button>
 
-        {month && year && (
-          <div className="average">
-              <h2>Your Results</h2>
-              <h4>In {month} {year}, there were {avg}ppm carbon in the atmosphere.</h4>
-              {/* <h4>Today, there are TBD ppm carbon in the atmosphere.</h4>
-              <h4>That's an increase of TBD ppm during your lifetime thus far.</h4>
-              <h4>These levels are speeding up. As a comparison, carbon only increased TBD ppm during the 41 years before your birth.</h4>
-              <h3><em>Carbon dioxide in the atmosphere is measured in parts per million (ppm). Yearly average carbon figures dating back to 1958 come from Mauna Loa (Hawaii) and the South Pole. Carbon figures before 1958 come from measurements of ice core samples in Antarctica.</em></h3>
-              <h2>Learn more (link) about how the results were calculated.....This scrolls to the bottom upon click</h2> */}
+        {avg && (
+          <div>
+            <h1>The average was {avg}</h1>
           </div>
         )}
     </>
