@@ -6,7 +6,6 @@ import Papa from 'papaparse';
 
 const App = () => {
 
-
   useEffect(() => {
     fetch('./carbondata.csv')
       .then(response => response.blob())
@@ -50,20 +49,19 @@ const handleYearClick = (e) => {
 }
 
 const handleAvgClick = (event) => {
+  let yearNumber = Number(year)
+  let monthNumber = months.indexOf(month) + 1
+
   for (let i = 0; i < carData.length; i++) {
     if (month === '' || year === '') {
     alert('Please complete the drop-down items');
     return;
     } else {
-      let newMonth = months.indexOf(Number(carData[i].Month) + 1)
-      setYear(Number(year))
-
-      if (Number(carData[i].Year) === year &&
-         Number(carData[i].Month) === month) {
+      if (Number(carData[i].Year) === yearNumber &&
+         Number(carData[i].Month) === monthNumber) {
+          console.log(yearNumber, monthNumber)
          setAvg(Number(carData[i].Average))
-         break;
           }
-      break;
      }
   }
 }
