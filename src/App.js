@@ -14,8 +14,8 @@ const App = () => {
 
 useEffect(() => {
   // fetch('../public/data.csv')
-  // .then((res) => res.text())
-  // .then((res) => console.log(res))
+      // .then((res) => res.text())
+      // .then((res) => console.log(res))
 
   const carbonData = `Month,Year,Average
   3,1958,314.43
