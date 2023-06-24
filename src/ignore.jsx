@@ -1,9 +1,5 @@
 
-// {month && year && (
-//   //how can i initialize the setAverage function here to calculte the {avg}???
-//   <div className="average">
-//       <h2>Your Results</h2>
-//       <h4>In {month} {year}, there were {avg}ppm carbon in the atmosphere.</h4>
+
 //       {/* <h4>Today, there are TBD ppm carbon in the atmosphere.</h4>
 //       <h4>That's an increase of TBD ppm during your lifetime thus far.</h4>
 //       <h4>These levels are speeding up. As a comparison, carbon only increased TBD ppm during the 41 years before your birth.</h4>
