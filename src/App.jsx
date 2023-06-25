@@ -6,7 +6,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Button, Typography, MenuItem, Select, FormControl } from '@mui/material';
+import { Button, Typography, MenuItem, Select, FormControl, Container, spacing, Box } from '@mui/material';
 
 //npm install papaparse
 //npm install @fontsource/roboto
@@ -52,17 +52,17 @@ const App = () => {
 
   const handleMonthClick = (e) => {
     e.preventDefault();
-    console.log('month in dropdown:', e.target.value)
-    setMonth(e.target.value)
+    console.log('month in dropdown:', e.target.value);
+    setMonth(e.target.value);
   }
 
   const handleYearClick = (e) => {
     e.preventDefault();
-    setYear(e.target.value)
+    setYear(e.target.value);
   }
 
   const handleAvgClick = (event) => {
-    let yearNumber = Number(year)
+    let yearNumber = Number(year);
     let monthNumber = months.indexOf(month) + 1
 
     for (let i = 0; i < carData.length; i++) {
@@ -72,8 +72,8 @@ const App = () => {
       } else {
         if (Number(carData[i].Year) === yearNumber &&
           Number(carData[i].Month) === monthNumber) {
-          console.log(yearNumber, monthNumber)
-          setAvg(Number(carData[i].Average))
+          console.log(yearNumber, monthNumber);
+          setAvg(Number(carData[i].Average));
           //setIncrease((420.57 - avg))
         }
       }
@@ -98,42 +98,63 @@ const App = () => {
 
   return (
     <>
-      <Typography variant="h4">What's your Carbon Dioxide Birth Number?</Typography>
-      <Typography variant="h5">Select your birth information to find out!</Typography>
-      <div className="month">
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <Select
-            value={month}
-            onChange={handleMonthClick}
-            displayEmpty
-            inputProps={{ 'aria-label': 'Month' }}
-          >
-            <MenuItem value="" disabled>
-              Month</MenuItem>
-            {months.map((month) => (
-              <MenuItem key={month} value={month}>
-                {month}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-      <div className="year">
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <Select
-            value={year}
-            onChange={handleYearClick}
-            displayEmpty
-            inputProps={{ 'aria-label': 'Year' }}
-          >
-            <MenuItem value="" disabled>Year</MenuItem>
-            {years.map((year) => (
-              <MenuItem key={year} value={year}>{year}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </div>
-      <Button variant="contained" onClick={handleAvgClick}>GET MY RESULTS</Button>
+          <Typography variant="h4">What's your Carbon Dioxide Birth Number?</Typography>
+          <Typography variant="h5">Select your birth information to find out!</Typography>
+
+          <div className="month">
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <Select
+                value={month}
+                onChange={handleMonthClick}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Month' }}
+                sx={{
+                  fontSize: "1rem",
+                  ":hover": { bgcolor: "lightgrey" },
+                }}
+              >
+                <MenuItem value="" disabled>
+                  Month</MenuItem>
+                {months.map((month) => (
+                  <MenuItem key={month} value={month}>
+                    {month}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div className="year">
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <Select
+                value={year}
+                onChange={handleYearClick}
+                displayEmpty
+                inputProps={{ 'aria-label': 'Year' }}
+                sx={{
+                  fontSize: "1rem",
+                  ":hover": { bgcolor: "lightgrey" },
+                }}
+              >
+                <MenuItem value="" disabled>Year</MenuItem>
+                {years.map((year) => (
+                  <MenuItem key={year} value={year}>{year}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+
+          <Button
+            variant="contained"
+            onClick={handleAvgClick}
+            sx={{
+              width: "fit-content",
+              fontSize: "1rem",
+              ":hover": { bgcolor: "lightBlue" },
+            }}
+           >
+            GET MY RESULTS
+          </Button>
+
 
       {avg && (
         <div>
@@ -145,6 +166,7 @@ const App = () => {
 
         </div>
       )}
+
     </>
   )
 }
