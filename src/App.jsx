@@ -6,7 +6,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Button, Typography, MenuItem, Select, FormControl, Container, spacing, Box } from '@mui/material';
+import { Button, Typography, MenuItem, Select, FormControl, Container, spacing, Box, Grid } from '@mui/material';
 
 //npm install papaparse
 //npm install @fontsource/roboto
@@ -99,85 +99,112 @@ const App = () => {
   return (
     <Container>
       <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        minHeight: '100vh',
-      }}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
+          minHeight: '50vh',
+        }}
       >
-          <Typography variant="h4">What's your Carbon Dioxide Birth Number?</Typography>
-          <Typography variant="h5">Select your birth information to find out!</Typography>
+        <Typography variant="h4" sx={{ p: '8px' }}>What's your Carbon Dioxide Birth Number?</Typography>
+        <Typography variant="h5" sx={{ mb: '32px' }}>Select your birth information to find out!</Typography>
 
-          <div className="month">
-            <FormControl sx={{ m: 1, width: 300 }}>
-              <Select
-                value={month}
-                onChange={handleMonthClick}
-                displayEmpty
-                inputProps={{ 'aria-label': 'Month' }}
-                sx={{
-                  fontSize: "1rem",
-                  ":hover": { bgcolor: "lightgrey" },
-                }}
-              >
-                <MenuItem value="" disabled>
-                  Month</MenuItem>
-                {months.map((month) => (
-                  <MenuItem key={month} value={month}>
-                    {month}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <div className="year">
-            <FormControl sx={{ m: 1, width: 300 }}>
-              <Select
-                value={year}
-                onChange={handleYearClick}
-                displayEmpty
-                inputProps={{ 'aria-label': 'Year' }}
-                sx={{
-                  fontSize: "1rem",
-                  ":hover": { bgcolor: "lightgrey" },
-                }}
-              >
-                <MenuItem value="" disabled>Year</MenuItem>
-                {years.map((year) => (
-                  <MenuItem key={year} value={year}>{year}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-
-          <Button
-            variant="contained"
-            onClick={handleAvgClick}
-            sx={{
-              width: "fit-content",
-              fontSize: "1rem",
-              ":hover": { bgcolor: "lightBlue" },
-            }}
-           >
-            GET MY RESULTS
-          </Button>
-
-
-      {avg && (
-        <div>
-          <Typography variant="h4">Your Results</Typography>
-          <Typography variant="h5">In {month} {year} there were {avg} ppm carbon in the atmosphere. </Typography>
-          <Typography variant="h5">Today, there are 420.57 ppm carbon in the atmosphere. </Typography>
-          <Typography variant="h5">That's an increase of {increase} ppm during your lifetime thus far. </Typography>
-          {/*}  <h3>These levels are speeding up. As a comparison, carbon only increased {prevIncrease} during the {yearsPassed} years before you were born. </h3> */}
-
+        <div className="month">
+          <FormControl sx={{ m: 1, width: 300 }}>
+            <Select
+              value={month}
+              onChange={handleMonthClick}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Month' }}
+              sx={{
+                fontSize: "1rem",
+                ":hover": { bgcolor: "lightgrey" },
+              }}
+            >
+              <MenuItem value="" disabled>
+                Month</MenuItem>
+              {months.map((month) => (
+                <MenuItem key={month} value={month}>
+                  {month}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </div>
-      )}
-    </Box>
-</Container>
-  )
-}
+        <div className="year">
+          <FormControl sx={{ m: 1, width: 300 }}>
+            <Select
+              value={year}
+              onChange={handleYearClick}
+              displayEmpty
+              inputProps={{ 'aria-label': 'Year' }}
+              sx={{
+                fontSize: "1rem",
+                mb: '16px',
+                ":hover": { bgcolor: "lightgrey" },
+              }}
+            >
+              <MenuItem value="" disabled>Year</MenuItem>
+              {years.map((year) => (
+                <MenuItem key={year} value={year}>{year}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+
+        <Button
+          variant="contained"
+          onClick={handleAvgClick}
+          sx={{
+            width: "fit-content",
+            fontSize: "1rem",
+            ":hover": { bgcolor: "lightBlue" },
+          }}
+        >
+          GET MY RESULTS
+        </Button>
+
+
+        {avg && (
+          <>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography variant="h4" sx={{
+                  textAlign: 'center',
+                  pt: '70px',
+                  pb: '20px'
+                }}>Your Results</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Grid sx={{ display: 'flex' }}>
+                  <Typography variant="h5">
+                    In {month} {year} there were {avg} ppm carbon in the atmosphere.
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="h5">
+                  Today, there are {' '}
+                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
+                    420.57
+                  </Typography>
+                  {' '} ppm carbon in the atmosphere.
+                </Typography>
+
+              </Grid>
+              <Grid item xs={4}>
+                <Typography variant="h5">
+                  That's an increase of {increase} ppm during your lifetime thus far.
+                </Typography>
+              </Grid>
+            </Grid>
+          </>
+        )}
+      </Box>
+    </Container>
+  );
+};
 
 export default App;
+
