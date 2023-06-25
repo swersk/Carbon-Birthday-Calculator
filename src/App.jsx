@@ -97,7 +97,16 @@ const App = () => {
   }, [avg]);
 
   return (
-    <>
+    <Container>
+      <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        minHeight: '100vh',
+      }}
+      >
           <Typography variant="h4">What's your Carbon Dioxide Birth Number?</Typography>
           <Typography variant="h5">Select your birth information to find out!</Typography>
 
@@ -166,8 +175,8 @@ const App = () => {
 
         </div>
       )}
-
-    </>
+    </Box>
+</Container>
   )
 }
 
