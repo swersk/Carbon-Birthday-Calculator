@@ -1,5 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
+import Share from './Share.jsx'
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import '@fontsource/roboto/300.css';
@@ -182,9 +183,9 @@ const App = () => {
                 }}>Your Results</Typography>
               </Grid>
 
-              <Grid item xs={4} sx={{ borderRight: '1px solid black'}}>
+              <Grid item xs={4} sx={{ borderRight: '1px solid gray'}}>
                   <Typography variant="h5" align="center">
-                    In {month} {year} there were <br />
+                    In {month} {year}, there were <br />
                     <Box sx={{ padding: '15px' }}>
                     <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
                       {avg} ppm
@@ -221,11 +222,15 @@ const App = () => {
                     </Box>
                     during your lifetime thus far.
                   </Typography>
+                </Grid>
 
+                <Grid item xs={12} sx={{ justifyContent: 'center' }}>
+                  <Share />
                 </Grid>
               </Grid>
             </>
         )}
+
           </Box>
     </Container>
   );
