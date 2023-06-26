@@ -185,31 +185,43 @@ const App = () => {
               <Grid item xs={4} sx={{ borderRight: '1px solid black'}}>
                   <Typography variant="h5" align="center">
                     In {month} {year} there were <br />
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
+                    <Box sx={{ padding: '15px' }}>
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
                       {avg} ppm
                     </Typography>
-                     <br /> carbon in the atmosphere.
+                    </Box>
+                     carbon in the atmosphere.
                   </Typography>
               </Grid>
 
               <Grid item xs={4} sx={{ borderRight: '1px solid black'}}>
                 <Typography variant="h5" align="center">
                   Today, there are <br />
-                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
+                  <Box sx={{ padding: '15px' }}>
+                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem'}}>
                     420.57 ppm
                   </Typography>
-                  <br /> carbon in the atmosphere.
+                  </Box>
+                  carbon in the atmosphere.
                 </Typography>
               </Grid>
 
-              <Grid item xs={4}>
+
+              <Grid item xs={0.2}>
+              <img src="./img1.png" alt="Image" style={{ width: '70px', marginLeft: '10px', marginTop: '44px'}}/>
+              </Grid>
+
+              <Grid item xs={3.8}>
                   <Typography variant="h5" align="center">
                     That's an increase of <br />
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
-                      {increase} ppm
+                   <Box sx={{ padding: '15px' }}>
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem'}}>
+                  {increase} ppm
                     </Typography>
-                    <br />during your lifetime thus far.
+                    </Box>
+                    during your lifetime thus far.
                   </Typography>
+
                 </Grid>
               </Grid>
             </>
