@@ -7,11 +7,13 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Button, Typography, MenuItem, Select, FormControl, Container, spacing, Box, Grid } from '@mui/material';
+import { styled } from '@mui/system';
 
 //npm install papaparse
 //npm install @fontsource/roboto
 //npm install @mui/material @mui/styled-engine-sc styled-components
 //npm install @fontsource/roboto
+
 
 const App = () => {
 
@@ -37,6 +39,7 @@ const App = () => {
   const [increase, setIncrease] = useState(0);
   const [prevIncrease, setPrevIncrease] = useState(0);
   const [yearsPassed, setYearsPassed] = useState(0);
+
 
 
   let months = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -132,6 +135,7 @@ const App = () => {
             </Select>
           </FormControl>
         </div>
+
         <div className="year">
           <FormControl sx={{ m: 1, width: 300 }}>
             <Select
@@ -173,35 +177,44 @@ const App = () => {
                 <Typography variant="h4" sx={{
                   textAlign: 'center',
                   pt: '70px',
-                  pb: '20px'
+                  pb: '80px',
+                  mt: '50px'
                 }}>Your Results</Typography>
               </Grid>
+
+              <Grid item xs={4} sx={{ borderRight: '1px solid black'}}>
+                  <Typography variant="h5" align="center">
+                    In {month} {year} there were <br />
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
+                      {avg} ppm
+                    </Typography>
+                     <br /> carbon in the atmosphere.
+                  </Typography>
+              </Grid>
+
+              <Grid item xs={4} sx={{ borderRight: '1px solid black'}}>
+                <Typography variant="h5" align="center">
+                  Today, there are <br />
+                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
+                    420.57 ppm
+                  </Typography>
+                  <br /> carbon in the atmosphere.
+                </Typography>
+              </Grid>
+
               <Grid item xs={4}>
-                <Grid sx={{ display: 'flex' }}>
-                  <Typography variant="h5">
-                    In {month} {year} there were {avg} ppm carbon in the atmosphere.
+                  <Typography variant="h5" align="center">
+                    That's an increase of <br />
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
+                      {increase} ppm
+                    </Typography>
+                    <br />during your lifetime thus far.
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item xs={4}>
-                <Typography variant="h5">
-                  Today, there are {' '}
-                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold' }}>
-                    420.57
-                  </Typography>
-                  {' '} ppm carbon in the atmosphere.
-                </Typography>
-
-              </Grid>
-              <Grid item xs={4}>
-                <Typography variant="h5">
-                  That's an increase of {increase} ppm during your lifetime thus far.
-                </Typography>
-              </Grid>
-            </Grid>
-          </>
+            </>
         )}
-      </Box>
+          </Box>
     </Container>
   );
 };
