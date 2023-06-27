@@ -3,6 +3,7 @@ import './App.css';
 import Share from './Share.jsx'
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
+import Blurb from './Blurb.jsx';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -39,9 +40,11 @@ const App = () => {
   const [avg, setAvg] = useState(null);
   const [increase, setIncrease] = useState(0);
   const [prevIncrease, setPrevIncrease] = useState(0);
+  const [historicalIncrease, setHistoricalIncrease] = useState(0);
   const [yearsPassed, setYearsPassed] = useState(0);
+  const [difference, setDifference] = useState(0);
 
-
+  const current = new Date();
 
   let months = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
@@ -67,19 +70,37 @@ const App = () => {
 
   const handleAvgClick = (event) => {
     let yearNumber = Number(year);
-    let monthNumber = months.indexOf(month) + 1
+    let monthNumber = months.indexOf(month) + 1;
+
+    if (month === '' || year === '') {
+      alert('Please complete the drop-down items');
+      return;
+    }
+
+    const currentYear = current.getFullYear();
+    const currentMonth = current.getMonth() + 1;
+    const yearsPassed = currentYear - yearNumber;
+    const monthsPassed = currentMonth - monthNumber;
+
+    if (monthsPassed < 0) {
+      setDifference(yearsPassed - 1);
+    } else {
+      setDifference(yearsPassed);
+    }
 
     for (let i = 0; i < carData.length; i++) {
-      if (month === '' || year === '') {
-        alert('Please complete the drop-down items');
-        return;
-      } else {
-        if (Number(carData[i].Year) === yearNumber &&
-          Number(carData[i].Month) === monthNumber) {
-          console.log(yearNumber, monthNumber);
-          setAvg(Number(carData[i].Average));
-          //setIncrease((420.57 - avg))
-        }
+      if (Number(carData[i].Year) === yearNumber &&
+        Number(carData[i].Month) === monthNumber) {
+        setAvg(Number(carData[i].Average));
+      }
+    }
+
+    setHistoricalIncrease(yearNumber - yearsPassed)
+
+    for (let j = 0; j < carData.length; j++) {
+      if (Number(carData[j].Year) === historicalIncrease &&
+        Number(carData[j].Month) === monthNumber) {
+        setHistoricalIncrease(avg - Number(carData[j].Average))
       }
     }
   }
@@ -183,55 +204,60 @@ const App = () => {
                 }}>Your Results</Typography>
               </Grid>
 
-              <Grid item xs={4} sx={{ borderRight: '1px solid gray'}}>
-                  <Typography variant="h5" align="center">
-                    In {month} {year}, there were <br />
-                    <Box sx={{ padding: '15px' }}>
+              <Grid item xs={3} sx={{ borderRight: '1px solid gray' }}>
+                <Typography variant="h5" align="center">
+                  In {month} {year}, there were <br />
+                  <Box sx={{ padding: '15px' }}>
                     <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
                       {avg} ppm
                     </Typography>
-                    </Box>
-                     carbon in the atmosphere.
-                  </Typography>
-              </Grid>
-
-              <Grid item xs={4} sx={{ borderRight: '1px solid black'}}>
-                <Typography variant="h5" align="center">
-                  Today, there are <br />
-                  <Box sx={{ padding: '15px' }}>
-                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem'}}>
-                    420.57 ppm
-                  </Typography>
                   </Box>
                   carbon in the atmosphere.
                 </Typography>
               </Grid>
 
-
-              <Grid item xs={0.2}>
-              <img src="./img1.png" alt="Image" style={{ width: '70px', marginLeft: '10px', marginTop: '44px'}}/>
-              </Grid>
-
-              <Grid item xs={3.8}>
-                  <Typography variant="h5" align="center">
-                    That's an increase of <br />
-                   <Box sx={{ padding: '15px' }}>
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem'}}>
-                  {increase} ppm
+              <Grid item xs={3} sx={{ borderRight: '1px solid black' }} className="grid-item">
+                <Typography variant="h5" align="center">
+                  Today, there are <br />
+                  <Box sx={{ padding: '15px' }}>
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                      420.57 ppm
                     </Typography>
-                    </Box>
-                    during your lifetime thus far.
-                  </Typography>
-                </Grid>
-
-                <Grid item xs={12} sx={{ justifyContent: 'center' }}>
-                  <Share />
-                </Grid>
+                  </Box>
+                  carbon in the atmosphere.
+                </Typography>
               </Grid>
-            </>
+
+              <Grid item xs={3} sx={{ borderRight: '1px solid black'}}>
+                <Typography variant="h5" align="center">
+                  That's an increase of <br />
+                  <Box sx={{ padding: '15px' }}>
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                      {increase} ppm
+                    </Typography>
+                  </Box>
+                  during your lifetime thus far.
+                </Typography>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Typography variant="h5" align="center">
+                  These levels are speeding up. As a comparison, carbon only increased <br />
+                  <Box sx={{ padding: '15px' }}>
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                      {historicalIncrease} ppm
+                    </Typography>
+                  </Box>
+                  during the {difference} years <b>before</b> your birth.
+                </Typography>
+              </Grid>
+              </Grid>
+              <Blurb />
+          </>
         )}
 
-          </Box>
+      </Box>
+
     </Container>
   );
 };
