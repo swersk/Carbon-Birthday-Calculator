@@ -1,6 +1,6 @@
-//import logo from './logo.svg';
 import './App.css';
-import Share from './Share.jsx'
+import Share from './Share.jsx';
+import News from './News.jsx';
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import Blurb from './Blurb.jsx';
@@ -8,16 +8,11 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Button, Typography, MenuItem, Select, FormControl, Container, spacing, Box, Grid } from '@mui/material';
+import { Button, Typography, MenuItem, Select, FormControl, Container, Box, Grid } from '@mui/material';
 import { styled } from '@mui/system';
 
-//npm install papaparse
-//npm install @fontsource/roboto
-//npm install @mui/material @mui/styled-engine-sc styled-components
-//npm install @fontsource/roboto
-
-
 const App = () => {
+
 
   useEffect(() => {
     fetch('./carbondata.csv')
@@ -26,13 +21,11 @@ const App = () => {
         Papa.parse(blob, {
           header: true,
           complete: function (results) {
-            console.log('carData!!!!', results.data);
             setCarData(results.data);
           }
         });
       });
   }, []);
-
 
   const [carData, setCarData] = useState([]);
   const [month, setMonth] = useState('');
@@ -43,30 +36,99 @@ const App = () => {
   const [historicalIncrease, setHistoricalIncrease] = useState(0);
   const [yearsPassed, setYearsPassed] = useState(0);
   const [difference, setDifference] = useState(0);
+  const [trend, setTrend] = useState(0)
 
   const current = new Date();
 
   let months = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
 
+    let obj = {
+      1959: 21.38,
+      1960: 22.17,
+      1961: 22.43,
+      1962: 22.23,
+      1963: 22.08,
+      1964: 21.65,
+      1965: 21.43,
+      1966: 21.89,
+      1967: 21.71,
+      1968: 21.74,
+      1969: 22.63,
+      1970: 23.14,
+      1971: 23.42,
+      1972: 23.75,
+      1973: 24.93,
+      1974: 24.91,
+      1975: 25.16,
+      1976: 24.72,
+      1977: 25.73,
+      1978: 26.52,
+      1979: 27.40,
+      1980: 28.39,
+      1981: 29.16,
+      1982: 30.57,
+      1983: 32.03,
+      1984: 33.94,
+      1985: 35.32,
+      1986: 36.25,
+      1987: 37.13,
+      1988: 38.87,
+      1989: 39.45,
+      1990: 39.49,
+      1991: 39.50,
+      1992: 38.69,
+      1993: 38.05,
+      1994: 38.38,
+      1995: 38.36,
+      1996: 38.35,
+      1997: 37.06,
+      1998: 36.84,
+      1999: 37.02,
+      2000: 35.91,
+      2001: 34.05,
+      2002: 32.79,
+      2003: 33.11,
+      2004: 31.72,
+      2005: 30.53,
+      2006: 28.44,
+      2007: 27.69,
+      2008: 28.33,
+      2009: 26.28,
+      2010: 25.73,
+      2011: 22.77,
+      2012: 23.21,
+      2013: 21.62,
+      2014: 19.74,
+      2015: 17.66,
+      2016: 17.45,
+      2017: 16.14,
+      2018: 11.92,
+      2019: 11.17,
+      2020: 6.79,
+      2021: 4.23,
+      2022: 4.23,
+      2023: 4.23
+    };
+
+
   let startYear = 1959;
   let endYear = 2023;
 
   let years = [];
   for (let i = startYear; i <= endYear; i++) {
-    years.push(i)
+    years.push(i);
   }
 
   const handleMonthClick = (e) => {
     e.preventDefault();
-    console.log('month in dropdown:', e.target.value);
     setMonth(e.target.value);
-  }
+  };
 
   const handleYearClick = (e) => {
     e.preventDefault();
     setYear(e.target.value);
-  }
+  };
 
   const handleAvgClick = (event) => {
     let yearNumber = Number(year);
@@ -89,25 +151,27 @@ const App = () => {
     }
 
     for (let i = 0; i < carData.length; i++) {
-      if (Number(carData[i].Year) === yearNumber &&
-        Number(carData[i].Month) === monthNumber) {
+      if (Number(carData[i].Year) === yearNumber && Number(carData[i].Month) === monthNumber) {
         setAvg(Number(carData[i].Average));
       }
     }
 
-    setHistoricalIncrease(yearNumber - yearsPassed)
+    setHistoricalIncrease(yearNumber - yearsPassed);
 
     for (let j = 0; j < carData.length; j++) {
-      if (Number(carData[j].Year) === historicalIncrease &&
-        Number(carData[j].Month) === monthNumber) {
-        setHistoricalIncrease(avg - Number(carData[j].Average))
+      if (Number(carData[j].Year) === historicalIncrease && Number(carData[j].Month) === monthNumber) {
+        setHistoricalIncrease(avg - Number(carData[j].Average));
       }
     }
-  }
+  };
+
+  useEffect(() => {
+    setTrend(obj[year])
+  }, [year])
 
   useEffect(() => {
     if (avg !== null) {
-      const calculatedIncrease = 420.57 - avg;
+      const calculatedIncrease = 423.68 - avg;
       const numb = calculatedIncrease.toFixed(2);
       setIncrease(numb);
     }
@@ -115,13 +179,15 @@ const App = () => {
 
   useEffect(() => {
     if (increase !== null) {
-      const calculatedIncrease = 420.57 - avg;
+      const calculatedIncrease = 423.68 - avg;
       const numb = calculatedIncrease.toFixed(2);
       setIncrease(numb);
     }
   }, [avg]);
 
   return (
+    <>
+    <News />
     <Container>
       <Box
         sx={{
@@ -147,12 +213,9 @@ const App = () => {
                 ":hover": { bgcolor: "lightgrey" },
               }}
             >
-              <MenuItem value="" disabled>
-                Month</MenuItem>
+              <MenuItem value="" disabled>Month</MenuItem>
               {months.map((month) => (
-                <MenuItem key={month} value={month}>
-                  {month}
-                </MenuItem>
+                <MenuItem key={month} value={month}>{month}</MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -191,76 +254,119 @@ const App = () => {
           GET MY RESULTS
         </Button>
 
-
         {avg && (
           <>
+            <Typography variant="h4" sx={{ textAlign: 'center', pt: '70px', pb: '80px', mt: '50px' }}>Your Results</Typography>
+
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Typography variant="h4" sx={{
-                  textAlign: 'center',
-                  pt: '70px',
-                  pb: '80px',
-                  mt: '50px'
-                }}>Your Results</Typography>
-              </Grid>
-
-              <Grid item xs={3} sx={{ borderRight: '1px solid gray' }}>
-                <Typography variant="h5" align="center">
-                  In {month} {year}, there were <br />
-                  <Box sx={{ padding: '15px' }}>
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-                      {avg} ppm
-                    </Typography>
-                  </Box>
-                  carbon in the atmosphere.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={3} sx={{ borderRight: '1px solid black' }} className="grid-item">
-                <Typography variant="h5" align="center">
-                  Today, there are <br />
-                  <Box sx={{ padding: '15px' }}>
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-                      420.57 ppm
-                    </Typography>
-                  </Box>
-                  carbon in the atmosphere.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={3} sx={{ borderRight: '1px solid black'}}>
-                <Typography variant="h5" align="center">
-                  That's an increase of <br />
-                  <Box sx={{ padding: '15px' }}>
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-                      {increase} ppm
-                    </Typography>
-                  </Box>
-                  during your lifetime thus far.
-                </Typography>
+              <Grid item xs={3}>
+                <Box
+                  sx={{
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '4px',
+                    padding: '15px',
+                    height: '90%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Typography variant="h5" align="center">
+                    In {month} {year}, there were
+                  </Typography>
+                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
+                    {avg} ppm
+                  </Typography>
+                  <Typography variant="h5" align="center">
+                    carbon in the atmosphere.
+                  </Typography>
+                </Box>
               </Grid>
 
               <Grid item xs={3}>
-                <Typography variant="h5" align="center">
-                  These levels are speeding up. As a comparison, carbon only increased <br />
-                  <Box sx={{ padding: '15px' }}>
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-                      {historicalIncrease} ppm
+                <Box
+                  sx={{
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '4px',
+                    padding: '15px',
+                    height: '90%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Typography variant="h5" align="center">
+                    Today, there are
+                  </Typography>
+                  <Typography variant="h5" align="center" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
+                    423.68 ppm
+                  </Typography>
+                  <Typography variant="h5" align="center">
+                    carbon in the atmosphere.
+                  </Typography>
+                </Box>
+              </Grid>
+
+
+              <Grid item xs={3}>
+                <Box
+                  sx={{
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '4px',
+                    padding: '15px',
+                    height: '90%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Typography variant="h5" align="center">
+                    That's an increase of
+                  </Typography>
+                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
+                    {increase} ppm
+                  </Typography>
+                  <Typography variant="h5" align="center">
+                    during your lifetime thus far.
+                  </Typography>
+                </Box>
+              </Grid>
+
+
+              <Grid item xs={3}>
+                <Box
+                  sx={{
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+                    borderRadius: '4px',
+                    padding: '15px',
+                    height: '90%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Typography variant="h5" align="center">
+                    These levels are speeding up. <br /><br /> As a comparison, carbon only increased
+                  </Typography>
+                  <Typography variant="h5" align="center">
+                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
+                      {trend} ppm
                     </Typography>
-                  </Box>
-                  during the {difference} years <b>before</b> your birth.
-                </Typography>
+                  </Typography>
+                  <Typography variant="h5" align="center">
+                    during the {difference} years <b>before</b> your birth.
+                  </Typography>
+                </Box>
               </Grid>
-              </Grid>
-              <Blurb />
+            </Grid>
+
+            <Blurb />
           </>
         )}
-
       </Box>
-
     </Container>
+    </>
   );
-};
+}
 
 export default App;
-
