@@ -9,7 +9,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Button, Typography, MenuItem, Select, FormControl, Container, Box, Grid } from '@mui/material';
-import { styled } from '@mui/system';
+import Confetti from 'react-confetti';
 
 const App = () => {
 
@@ -37,6 +37,9 @@ const App = () => {
   const [yearsPassed, setYearsPassed] = useState(0);
   const [difference, setDifference] = useState(0);
   const [trend, setTrend] = useState(0)
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [showFire, setShowFire] = useState(false);
+
 
   const current = new Date();
 
@@ -163,11 +166,17 @@ const App = () => {
         setHistoricalIncrease(avg - Number(carData[j].Average));
       }
     }
+    //confetti
+    setShowConfetti(true);
+    setTimeout(() => {
+      setShowConfetti(false);
+      setShowFire(true);
+    }, 2000);
   };
 
   useEffect(() => {
     setTrend(obj[year])
-  }, [year])
+  }, [year, obj])
 
   useEffect(() => {
     if (avg !== null) {
@@ -253,6 +262,14 @@ const App = () => {
         >
           GET MY RESULTS
         </Button>
+
+        {showConfetti && (
+          <Confetti
+              width={window.innerWidth}
+              height={window.innerHeight}
+              numberOfPieces={200}
+          />
+        )}
 
         {avg && (
           <>
@@ -358,9 +375,15 @@ const App = () => {
                   </Typography>
                 </Box>
               </Grid>
-            </Grid>
 
+            </Grid>
+            <Share setShowConfetti={setShowConfetti} />
             <Blurb />
+      {showFire && (
+        <div
+        className="fire-animation"
+      />
+      )}
           </>
         )}
       </Box>
