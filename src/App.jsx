@@ -1,6 +1,6 @@
 import './App.css';
 import Share from './Share.jsx';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Papa from 'papaparse';
 import Blurb from './Blurb.jsx';
 import '@fontsource/roboto/300.css';
@@ -10,10 +10,22 @@ import '@fontsource/roboto/700.css';
 import { Button, Typography, MenuItem, Select, FormControl, Container, Box } from '@mui/material';
 import Confetti from 'react-confetti';
 import ResultsCards from './ResultsCards';
-import { useSpring, animated } from 'react-spring';
+import { animated } from 'react-spring';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 
 const App = () => {
+
+  const [carData, setCarData] = useState([]);
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
+  const [avg, setAvg] = useState(null);
+  const [increase, setIncrease] = useState(0);
+  const [historicalIncrease, setHistoricalIncrease] = useState(0);
+  const [difference, setDifference] = useState(0);
+  const [trend, setTrend] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const headingRef = useRef(null);
 
   useEffect(() => {
     fetch('./carbondata.csv')
@@ -27,20 +39,6 @@ const App = () => {
         });
       });
   }, []);
-
-  const [carData, setCarData] = useState([]);
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
-  const [avg, setAvg] = useState(null);
-  const [increase, setIncrease] = useState(0);
-  const [prevIncrease, setPrevIncrease] = useState(0);
-  const [historicalIncrease, setHistoricalIncrease] = useState(0);
-  const [yearsPassed, setYearsPassed] = useState(0);
-  const [difference, setDifference] = useState(0);
-  const [trend, setTrend] = useState(0)
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [isBouncing, setIsBouncing] = useState(false);
-
 
   const current = new Date();
 
@@ -166,48 +164,46 @@ const App = () => {
         setHistoricalIncrease(avg - Number(carData[j].Average));
       }
     }
-
-
-    //confetti
+    // Confetti
     setShowConfetti(true);
-    setIsBouncing(true); // Start the bouncing animation
     setTimeout(() => {
       setShowConfetti(false);
     }, 8000);
-
   };
 
+  // Scroll to the ResultsCards component
   useEffect(() => {
-    setTrend(obj[year])
-  }, [year, obj])
+    const resultsCardsElement = document.getElementById('your-results');
+    if (resultsCardsElement) {
+      const elementPosition = resultsCardsElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition - 50; // Adjust this value to leave space from the top
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  }, [avg]);
 
+  // Set the trend value based on the selected year
+  useEffect(() => {
+    setTrend(obj[year]);
+  }, [year, obj]);
+
+  // Calculate the increase value whenever the 'avg' changes
   useEffect(() => {
     if (avg !== null) {
       const calculatedIncrease = 423.68 - avg;
       const numb = calculatedIncrease.toFixed(2);
       setIncrease(numb);
     }
-  }, [prevIncrease]);
-
-  useEffect(() => {
-    if (increase !== null) {
-      const calculatedIncrease = 423.68 - avg;
-      const numb = calculatedIncrease.toFixed(2);
-      setIncrease(numb);
-    }
   }, [avg]);
 
-    // Config for the bouncing animation
-    const bouncingConfig = {
-      from: { transform: 'translateY(0)' },
-      to: { transform: 'translateY(-100px)' },
-      config: { mass: 1, tension: 100, friction: 10, duration: 30000 },
-      loop: true
-    };
 
-      // Use the useSpring hook to create the bouncing animation
-  const bouncingAnimation = useSpring(isBouncing ? bouncingConfig : {});
 
+
+  const { width, height } = useWindowSize();
+  const middleX = width / 2;
+  const middleY = height / 2;
 
   return (
     <>
@@ -227,7 +223,7 @@ const App = () => {
             backgroundColor: '#F8F8F8',
           }}
         >
-          <Typography variant="h4" sx={{ p: '8px'}}>What's your Carbon Dioxide Birth Number?</Typography>
+          <Typography variant="h4" sx={{ p: '8px' }}>What's your Carbon Dioxide Birth Number?</Typography>
           <Typography variant="h5" sx={{ mb: '32px' }}>Select your birth information to find out!</Typography>
 
           <div className="month">
@@ -273,52 +269,65 @@ const App = () => {
 
           <Button
             variant="contained"
-            onClick={handleAvgClick}
+            onClick={() => {
+              handleAvgClick();
+            //  scrollToResults();
+            }}
             sx={{
               width: "fit-content",
-              marginTop: '20px',
-              marginBottom: '20px',
+              mt: '20px',
+              mb: '20px',
               fontSize: "1rem",
               ":hover": { bgcolor: "lightBlue" }
             }}
           >
             GET MY RESULTS
           </Button>
-          </Box>
+        </Box>
 
-          {showConfetti && (
-            <Confetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-              numberOfPieces={200}
-            />
-          )}
-
-
-
-          {avg && (
-            <>
-              <animated.div style={bouncingAnimation}>
+        {avg && (
+          <>
+            <animated.div>
               <Typography
+                id="your-results"
+                ref={headingRef} //where the confetti source is
                 className="results"
                 variant="h4"
-                sx={{ textAlign: 'center', pt: '40px', pb: '30px', mt: '50px' }}
-                >
-                  Your Results
-                </Typography>
-              </animated.div>
+                sx={{ textAlign: 'center', pt: '40px', pb: '30px', mt: '50px'}}
+              >
+                Your Results
+              </Typography>
+            </animated.div>
+            <div id="results-cards">
+              {showConfetti && ( // Display the confetti only when showConfetti is true
+                <Confetti
+                  confettiSource={headingRef.current ? {
+                    x: headingRef.current.getBoundingClientRect().left + headingRef.current.getBoundingClientRect().width / 2,
+                    y: headingRef.current.getBoundingClientRect().top + headingRef.current.getBoundingClientRect().height / 2,
+                    w: 1,
+                    h: 1,
+                  } : { x: middleX, y: middleY, w: 1, h: 1 }}
+                  numberOfPieces={200}
+                />
+              )}
               <ResultsCards
-              month={month}
-              year={year}
-              avg={avg}
-              increase={increase}
-              difference={difference}
-              trend={trend}
+                month={month}
+                year={year}
+                avg={avg}
+                increase={increase}
+                difference={difference}
+                trend={trend}
               />
+            </div>
+
+            <Box sx={{ textAlign: 'center' }}>
               <Share setShowConfetti={setShowConfetti} />
+            </Box>
+            <Box sx={{ textAlign: 'center' }}>
               <Blurb />
-            </>
-          )}
+            </Box>
+          </>
+        )}
 
       </Container>
     </>
@@ -326,3 +335,5 @@ const App = () => {
 }
 
 export default App;
+
+
