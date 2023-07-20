@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const Blurb = () => {
   return (
     <>
-   <br /> <div class="carbonWrapper">
+   <br /> <div className="carbonWrapper">
       <p><em>Carbon dioxide in the atmosphere is measured in parts per million (ppm).< br /> Yearly average carbon figures come from Hawaii, the South Pole and Antarctica.</em></p>
     </div>
 

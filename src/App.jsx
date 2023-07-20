@@ -1,6 +1,5 @@
 import './App.css';
 import Share from './Share.jsx';
-import News from './News.jsx';
 import React, { useState, useEffect } from 'react';
 import Papa from 'papaparse';
 import Blurb from './Blurb.jsx';
@@ -10,6 +9,9 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Button, Typography, MenuItem, Select, FormControl, Container, Box, Grid } from '@mui/material';
 import Confetti from 'react-confetti';
+import { Spring } from 'react-spring';
+import ResultsCards from './ResultsCards';
+
 
 const App = () => {
 
@@ -38,7 +40,7 @@ const App = () => {
   const [difference, setDifference] = useState(0);
   const [trend, setTrend] = useState(0)
   const [showConfetti, setShowConfetti] = useState(false);
-  const [showFire, setShowFire] = useState(false);
+  const [showRain, setShowRain] = useState(false);
 
 
   const current = new Date();
@@ -166,12 +168,15 @@ const App = () => {
         setHistoricalIncrease(avg - Number(carData[j].Average));
       }
     }
+
+
     //confetti
     setShowConfetti(true);
     setTimeout(() => {
       setShowConfetti(false);
-      setShowFire(true);
-    }, 2000);
+      setShowRain(true);
+    }, 8000);
+
   };
 
   useEffect(() => {
@@ -196,7 +201,6 @@ const App = () => {
 
   return (
     <>
-    <News />
     <Container>
       <Box
         sx={{
@@ -257,7 +261,7 @@ const App = () => {
           sx={{
             width: "fit-content",
             fontSize: "1rem",
-            ":hover": { bgcolor: "lightBlue" },
+            ":hover": { bgcolor: "lightBlue" }
           }}
         >
           GET MY RESULTS
@@ -273,117 +277,10 @@ const App = () => {
 
         {avg && (
           <>
-            <Typography variant="h4" sx={{ textAlign: 'center', pt: '70px', pb: '80px', mt: '50px' }}>Your Results</Typography>
-
-            <Grid container spacing={2}>
-              <Grid item xs={3}>
-                <Box
-                  sx={{
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-                    borderRadius: '4px',
-                    padding: '15px',
-                    height: '90%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Typography variant="h5" align="center">
-                    In {month} {year}, there were
-                  </Typography>
-                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
-                    {avg} ppm
-                  </Typography>
-                  <Typography variant="h5" align="center">
-                    carbon in the atmosphere.
-                  </Typography>
-                </Box>
-              </Grid>
-
-              <Grid item xs={3}>
-                <Box
-                  sx={{
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-                    borderRadius: '4px',
-                    padding: '15px',
-                    height: '90%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Typography variant="h5" align="center">
-                    Today, there are
-                  </Typography>
-                  <Typography variant="h5" align="center" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-                    423.68 ppm
-                  </Typography>
-                  <Typography variant="h5" align="center">
-                    carbon in the atmosphere.
-                  </Typography>
-                </Box>
-              </Grid>
-
-
-              <Grid item xs={3}>
-                <Box
-                  sx={{
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-                    borderRadius: '4px',
-                    padding: '15px',
-                    height: '90%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Typography variant="h5" align="center">
-                    That's an increase of
-                  </Typography>
-                  <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
-                    {increase} ppm
-                  </Typography>
-                  <Typography variant="h5" align="center">
-                    during your lifetime thus far.
-                  </Typography>
-                </Box>
-              </Grid>
-
-
-              <Grid item xs={3}>
-                <Box
-                  sx={{
-                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-                    borderRadius: '4px',
-                    padding: '15px',
-                    height: '90%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Typography variant="h5" align="center">
-                    These levels are speeding up. <br /><br /> As a comparison, carbon only increased
-                  </Typography>
-                  <Typography variant="h5" align="center">
-                    <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
-                      {trend} ppm
-                    </Typography>
-                  </Typography>
-                  <Typography variant="h5" align="center">
-                    during the {difference} years <b>before</b> your birth.
-                  </Typography>
-                </Box>
-              </Grid>
-
-            </Grid>
+            <Typography  className="results" variant="h4" sx={{ textAlign: 'center', pt: '40px', pb: '30px', mt: '50px' }}>Your Results</Typography>
+            <ResultsCards month={month} year={year} avg={avg} increase={increase} difference={difference} trend={trend}/>
             <Share setShowConfetti={setShowConfetti} />
             <Blurb />
-      {showFire && (
-        <div
-        className="fire-animation"
-      />
-      )}
           </>
         )}
       </Box>

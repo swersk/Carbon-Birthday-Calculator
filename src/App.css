@@ -7,6 +7,7 @@
     transform: translateY(-100%);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
@@ -22,7 +23,8 @@
   height: 100%;
   z-index: 1000;
   background: red center/cover no-repeat;
-  animation: fallingAnimation 3s ease-in-out; /* Adjust the duration as needed */
+  animation: fallingAnimation 3s ease-in-out;
+  /* Adjust the duration as needed */
 }
 
 
@@ -65,7 +67,7 @@ div.carbonWrapper {
   text-align: center;
   align-items: center;
   margin-top: 30px;
-  }
+}
 
 p {
   display: flex;
@@ -81,12 +83,10 @@ p {
   text-align: center;
   font-size: 17px;
   color: black;
-  font-family: 'Chronicle Text G2 A','Chronicle Text G2 B','Chronicle Text G2',Georgia,serif;
+  font-family: 'Chronicle Text G2 A', 'Chronicle Text G2 B', 'Chronicle Text G2', Georgia, serif;
   font-weight: normal;
   line-height: 30px;
 }
-
-
 
 
 /* @keyframes App-logo-spin {
@@ -97,3 +97,4 @@ p {
     transform: rotate(360deg);
   }
 } */
+
