@@ -3,6 +3,7 @@ import Share from './Share.jsx';
 import React, { useState, useEffect, useRef } from 'react';
 import Papa from 'papaparse';
 import Blurb from './Blurb.jsx';
+import Storm from './Storm.jsx';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -10,7 +11,7 @@ import '@fontsource/roboto/700.css';
 import { Button, Typography, MenuItem, Select, FormControl, Container, Box } from '@mui/material';
 import Confetti from 'react-confetti';
 import ResultsCards from './ResultsCards';
-import { animated } from 'react-spring';
+import { animated} from 'react-spring';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
 
@@ -25,6 +26,8 @@ const App = () => {
   const [difference, setDifference] = useState(0);
   const [trend, setTrend] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [showStorm, setShowStorm] = useState(false);
+
   const headingRef = useRef(null);
 
   useEffect(() => {
@@ -168,7 +171,8 @@ const App = () => {
     setShowConfetti(true);
     setTimeout(() => {
       setShowConfetti(false);
-    }, 8000);
+      setShowStorm(true);
+    }, 4000);
   };
 
   // Scroll to the ResultsCards component
@@ -198,12 +202,14 @@ const App = () => {
     }
   }, [avg]);
 
-
-
-
-  const { width, height } = useWindowSize();
+    const { width, height } = useWindowSize();
   const middleX = width / 2;
   const middleY = height / 2;
+  // Calculate the full height of the page
+ const fullPageHeight = document.documentElement.scrollHeight;
+
+
+
 
   return (
     <>
@@ -271,7 +277,7 @@ const App = () => {
             variant="contained"
             onClick={() => {
               handleAvgClick();
-            //  scrollToResults();
+              //  scrollToResults();
             }}
             sx={{
               width: "fit-content",
@@ -293,23 +299,37 @@ const App = () => {
                 ref={headingRef} //where the confetti source is
                 className="results"
                 variant="h4"
-                sx={{ textAlign: 'center', pt: '40px', pb: '30px', mt: '50px'}}
+                sx={{ textAlign: 'center', pt: '40px', pb: '30px', mt: '50px' }}
               >
                 Your Results
               </Typography>
             </animated.div>
+
             <div id="results-cards">
               {showConfetti && ( // Display the confetti only when showConfetti is true
-                <Confetti
-                  confettiSource={headingRef.current ? {
-                    x: headingRef.current.getBoundingClientRect().left + headingRef.current.getBoundingClientRect().width / 2,
-                    y: headingRef.current.getBoundingClientRect().top + headingRef.current.getBoundingClientRect().height / 2,
-                    w: 1,
-                    h: 1,
-                  } : { x: middleX, y: middleY, w: 1, h: 1 }}
-                  numberOfPieces={200}
-                />
+              <>
+            {/* <Confetti
+              width={window.innerWidth}
+              height={window.innerHeight}
+              numberOfPieces={200}
+          /> */}
+             <Confetti
+                confettiSource={headingRef.current ? {
+                  x: headingRef.current.getBoundingClientRect().left + headingRef.current.getBoundingClientRect().width / 2,
+                  y: headingRef.current.getBoundingClientRect().top + headingRef.current.getBoundingClientRect().height / 2,
+                  w: 1,
+                  h: 1,
+                } : { x: middleX, y: middleY, w: 1, h: 1 }}
+                numberOfPieces={200}
+          />
+                </>
               )}
+
+              {showStorm && (
+                <Storm showStorm={showStorm}/>
+                )}
+
+
               <ResultsCards
                 month={month}
                 year={year}
@@ -319,7 +339,6 @@ const App = () => {
                 trend={trend}
               />
             </div>
-
             <Box sx={{ textAlign: 'center' }}>
               <Share setShowConfetti={setShowConfetti} />
             </Box>
@@ -337,3 +356,4 @@ const App = () => {
 export default App;
 
 
+//confetti from the button:

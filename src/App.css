@@ -2,43 +2,6 @@
   text-align: center;
 }
 
-@keyframes fallingAnimation {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-
-.fire-animation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-  background: red center/cover no-repeat;
-  animation: fallingAnimation 3s ease-in-out;
-  /* Adjust the duration as needed */
-}
-
-
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-} */
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -52,10 +15,6 @@
 
 .App-link {
   color: #61dafb;
-}
-
-.results {
-  margin-bottom: 230px;
 }
 
 div.carbonWrapper {
@@ -88,13 +47,35 @@ p {
   line-height: 30px;
 }
 
+/*storm*/
+.storm-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Ensure the fireballs don't interfere with interactions */
+  z-index: 9999; /* Make sure the fireballs are above other content */
+}
 
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 
+.storm-element {
+  position: absolute;
+  width: 100px; /* Adjust the width to your desired size */
+  height: 100px; /* Adjust the height to your desired size */
+  background-image: url("/public/fire.png"); /* Update the path to your image in the public folder */
+  background-size: contain;
+  pointer-events: none; /* Ensure the fireballs don't interfere with interactions */
+  animation: fallingStorm 5s linear infinite; /* Update the duration and timing function as needed */
+}
+/* Fireball animations */
+@keyframes fallingStorm {
+  0% {
+    opacity: 0.5;
+    transform: translateY(-100px) scale(0.8); /* Move the element up before falling */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(calc(100vh + 50px)) scale(1); /* Move the element down to the bottom of the page */
+  }
+}

@@ -52,7 +52,39 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
               <Typography variant="h5" align="center">
                 {cardData[index].title}
               </Typography>
-              <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
+              <Typography component="span" variant="h5"
+                sx={{
+                  fontWeight: 700,
+                  fontSize: '2.5rem',
+                  textAlign: 'center',
+                  position: 'relative',
+                  backgroundImage: 'linear-gradient(to right, red, red 50%, #000 50%)',
+                  backgroundSize: '200% 100%',
+                  backgroundPosition: '-100%',
+                  display: 'inline-block',
+                  padding: '5px 0',
+                  '-webkit-background-clip': 'text',
+                  '-webkit-text-fill-color': 'transparent',
+                  transition: 'all 0.3s ease-in-out',
+                  "&::before": {
+                    content: "''",
+                    background: 'red',
+                    display: 'block',
+                    position: 'absolute',
+                    bottom: '-3px',
+                    left: 0,
+                    width: 0,
+                    height: '3px',
+                    transition: 'all 0.3s ease-in-out',
+                  },
+                  "&:hover": {
+                    backgroundPosition: '0',
+                    "&::before": {
+                      width: '100%',
+                    },
+                  },
+                }}
+              >
                 {cardData[index].value}
               </Typography>
               <Typography variant="h5" align="center">
@@ -69,118 +101,3 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
 export default ResultsCards;
 
 
-
-
-
-// import React from 'react';
-// import { Typography, Box, Grid } from '@mui/material';
-
-// const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
-//   return (
-//     <>
-//       <Grid container spacing={2}>
-//         <Grid item xs={3}>
-//           <Box
-//             sx={{
-//               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-//               borderRadius: '4px',
-//               padding: '15px',
-//               height: '90%',
-//               display: 'flex',
-//               flexDirection: 'column',
-//               justifyContent: 'center',
-//             }}
-//           >
-//             <Typography variant="h5" align="center">
-//               In {month} {year}, there were
-//             </Typography>
-//             <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
-//               {avg} ppm
-//             </Typography>
-//             <Typography variant="h5" align="center">
-//               carbon in the atmosphere.
-//             </Typography>
-//           </Box>
-//         </Grid>
-
-//         <Grid item xs={3}>
-//           <Box
-//             sx={{
-//               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-//               borderRadius: '4px',
-//               padding: '15px',
-//               height: '90%',
-//               display: 'flex',
-//               flexDirection: 'column',
-//               justifyContent: 'center',
-//             }}
-//           >
-//             <Typography variant="h5" align="center">
-//               Today, there are
-//             </Typography>
-//             <Typography variant="h5" align="center" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }}>
-//               423.68 ppm
-//             </Typography>
-//             <Typography variant="h5" align="center">
-//               carbon in the atmosphere.
-//             </Typography>
-//           </Box>
-//         </Grid>
-
-
-//         <Grid item xs={3}>
-//           <Box
-//             sx={{
-//               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-//               borderRadius: '4px',
-//               padding: '15px',
-//               height: '90%',
-//               display: 'flex',
-//               flexDirection: 'column',
-//               justifyContent: 'center',
-//             }}
-//           >
-//             <Typography variant="h5" align="center">
-//               That's an increase of
-//             </Typography>
-//             <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
-//               {increase} ppm
-//             </Typography>
-//             <Typography variant="h5" align="center">
-//               during your lifetime thus far.
-//             </Typography>
-//           </Box>
-//         </Grid>
-
-
-//         <Grid item xs={3}>
-//           <Box
-//             sx={{
-//               boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-//               borderRadius: '4px',
-//               padding: '15px',
-//               height: '90%',
-//               display: 'flex',
-//               flexDirection: 'column',
-//               justifyContent: 'center',
-//             }}
-//           >
-//             <Typography variant="h5" align="center">
-//               These levels are speeding up. <br /><br /> As a comparison, carbon only increased
-//             </Typography>
-//             <Typography variant="h5" align="center">
-//               <Typography component="span" variant="h5" sx={{ fontWeight: 'bold', fontSize: '2.5rem' }} align="center">
-//                 {trend} ppm
-//               </Typography>
-//             </Typography>
-//             <Typography variant="h5" align="center">
-//               during the {difference} years <b>before</b> your birth.
-//             </Typography>
-//           </Box>
-//         </Grid>
-//       </Grid>
-//     </>
-//   )
-// };
-
-// export default ResultsCards;
