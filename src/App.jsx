@@ -167,7 +167,7 @@ const App = () => {
     setShowConfetti(true);
     setTimeout(() => {
       setShowConfetti(false);
-    }, 1000);
+    }, 4000);
   };
 
   // Scroll to the ResultsCards component
