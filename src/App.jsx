@@ -11,6 +11,7 @@ import Confetti from 'react-confetti';
 import ResultsCards from './ResultsCards';
 import { animated } from 'react-spring';
 import useWindowSize from 'react-use/lib/useWindowSize';
+import { useTheme } from '@mui/material/styles';
 
 const App = () => {
 
@@ -23,6 +24,7 @@ const App = () => {
   const [difference, setDifference] = useState(0);
   const [trend, setTrend] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
+  const theme = useTheme();
 
   const headingRef = useRef(null);
 
@@ -202,8 +204,6 @@ const App = () => {
   const middleY = height / 2;
 
 
-
-
   return (
     <>
       <Container>
@@ -220,13 +220,19 @@ const App = () => {
             marginLeft: '80px',
             marginRight: '80px',
             backgroundColor: '#F8F8F8',
+            [theme.breakpoints.down('sm')]: {
+              width: '90%',
+              marginLeft: '5%',
+              marginRight: '5%',
+              textAlign: 'center'
+            }
           }}
         >
           <Typography variant="h4" sx={{ p: '8px' }}>What's your Carbon Dioxide Birth Number?</Typography>
-          <Typography variant="h5" sx={{ mb: '32px' }}>Select your birth information to find out!</Typography>
+          <Typography variant="h5" sx={{ mb: '32px', marginLeft: '7px' }}>Select your birth information to find out!</Typography>
 
           <div className="month">
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: width < 600 ? '100%' : 300 }}>
               <Select
                 value={month}
                 onChange={handleMonthClick}
@@ -246,7 +252,7 @@ const App = () => {
           </div>
 
           <div className="year">
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: width < 600 ? '100%' : 300 }}>
               <Select
                 value={year}
                 onChange={handleYearClick}
@@ -290,7 +296,7 @@ const App = () => {
                 ref={headingRef} //where the confetti source is
                 className="results"
                 variant="h4"
-                sx={{ textAlign: 'center', pt: '40px', pb: '30px', mt: '50px' }}
+                sx={{ textAlign: 'center', pt: '20px', pb: '20px', mt: '50px' }}
               >
                 Your Results
               </Typography>

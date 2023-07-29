@@ -27,10 +27,22 @@ div.carbonWrapper {
   align-items: center;
 }
 
+@media (max-width: 600px) {
+  div.carbonWrapper {
+    height: 250px; /* Height for mobile screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding-bottom: 20px;
+  }
+}
+
 p {
   display: flex;
   justify-content: center;
-  padding: 60px;
+  padding: 50px;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
@@ -45,3 +57,14 @@ p {
   font-weight: normal;
   line-height: 30px;
 }
+
+.footer {
+  font-size: 17px;
+  font-family: 'Chronicle Text G2 A', 'Chronicle Text G2 B', 'Chronicle Text G2', Georgia, serif;
+  font-weight: normal;
+  word-wrap: break-word;
+  max-width:300px;
+  line-height: 30px;
+}
+
+
