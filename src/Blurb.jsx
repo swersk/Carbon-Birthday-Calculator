@@ -7,7 +7,7 @@ const Blurb = () => {
   return (
     <>
    <br /> <div className="carbonWrapper">
-      <p><em>Carbon dioxide in the atmosphere is measured in parts per million (ppm).< br /> Yearly average carbon figures come from Hawaii, the South Pole and Antarctica.</em></p>
+      <p style={{ marginTop: '18px' }}><em>Carbon dioxide in the atmosphere is measured in parts per million (ppm).< br /> Yearly average carbon figures come from Hawaii, the South Pole and Antarctica. </em></p>
     </div>
 
     <div>

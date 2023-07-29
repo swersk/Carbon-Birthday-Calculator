@@ -1,9 +1,7 @@
 import './App.css';
-import Share from './Share.jsx';
 import React, { useState, useEffect, useRef } from 'react';
 import Papa from 'papaparse';
 import Blurb from './Blurb.jsx';
-import Storm from './Storm.jsx';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -11,9 +9,8 @@ import '@fontsource/roboto/700.css';
 import { Button, Typography, MenuItem, Select, FormControl, Container, Box } from '@mui/material';
 import Confetti from 'react-confetti';
 import ResultsCards from './ResultsCards';
-import { animated} from 'react-spring';
+import { animated } from 'react-spring';
 import useWindowSize from 'react-use/lib/useWindowSize';
-
 
 const App = () => {
 
@@ -26,7 +23,6 @@ const App = () => {
   const [difference, setDifference] = useState(0);
   const [trend, setTrend] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
-  const [showStorm, setShowStorm] = useState(false);
 
   const headingRef = useRef(null);
 
@@ -171,8 +167,7 @@ const App = () => {
     setShowConfetti(true);
     setTimeout(() => {
       setShowConfetti(false);
-      setShowStorm(true);
-    }, 4000);
+    }, 1000);
   };
 
   // Scroll to the ResultsCards component
@@ -202,11 +197,9 @@ const App = () => {
     }
   }, [avg]);
 
-    const { width, height } = useWindowSize();
+  const { width, height } = useWindowSize();
   const middleX = width / 2;
   const middleY = height / 2;
-  // Calculate the full height of the page
- const fullPageHeight = document.documentElement.scrollHeight;
 
 
 
@@ -272,12 +265,10 @@ const App = () => {
               </Select>
             </FormControl>
           </div>
-
           <Button
             variant="contained"
             onClick={() => {
               handleAvgClick();
-              //  scrollToResults();
             }}
             sx={{
               width: "fit-content",
@@ -306,30 +297,19 @@ const App = () => {
             </animated.div>
 
             <div id="results-cards">
-              {showConfetti && ( // Display the confetti only when showConfetti is true
-              <>
-            {/* <Confetti
-              width={window.innerWidth}
-              height={window.innerHeight}
-              numberOfPieces={200}
-          /> */}
-             <Confetti
-                confettiSource={headingRef.current ? {
-                  x: headingRef.current.getBoundingClientRect().left + headingRef.current.getBoundingClientRect().width / 2,
-                  y: headingRef.current.getBoundingClientRect().top + headingRef.current.getBoundingClientRect().height / 2,
-                  w: 1,
-                  h: 1,
-                } : { x: middleX, y: middleY, w: 1, h: 1 }}
-                numberOfPieces={200}
-          />
+              {showConfetti && (
+                <>
+                  <Confetti
+                    confettiSource={headingRef.current ? {
+                      x: headingRef.current.getBoundingClientRect().left + headingRef.current.getBoundingClientRect().width / 2,
+                      y: headingRef.current.getBoundingClientRect().top + headingRef.current.getBoundingClientRect().height / 2,
+                      w: 1,
+                      h: 1,
+                    } : { x: middleX, y: middleY, w: 1, h: 1 }}
+                    numberOfPieces={200}
+                  />
                 </>
               )}
-
-              {showStorm && (
-                <Storm showStorm={showStorm}/>
-                )}
-
-
               <ResultsCards
                 month={month}
                 year={year}
@@ -340,7 +320,6 @@ const App = () => {
               />
             </div>
             <Box sx={{ textAlign: 'center' }}>
-              <Share setShowConfetti={setShowConfetti} />
             </Box>
             <Box sx={{ textAlign: 'center' }}>
               <Blurb />
@@ -356,4 +335,3 @@ const App = () => {
 export default App;
 
 
-//confetti from the button:

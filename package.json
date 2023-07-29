@@ -16,6 +16,7 @@
     "dat.gui": "^0.7.9",
     "jquery": "^3.7.0",
     "papaparse": "^5.4.1",
+    "particles.js": "^2.0.0",
     "react": "^18.2.0",
     "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",

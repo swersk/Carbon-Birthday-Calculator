@@ -1,13 +1,13 @@
-import CreateIcon from '@mui/icons-material/Create';
-import { Button } from '@mui/material';
-import { useState } from 'react';
+// import CreateIcon from '@mui/icons-material/Create';
+// import { Button } from '@mui/material';
+// import { useState } from 'react';
 
 
 
-const Share = () => {
+// const Share = () => {
 
 
-  const handleContact = () => {
+//   const handleContact = () => {
     //email
         // const emailAddress = 'ms.swersky@gmail.com';
         // const subject = 'A fun quiz for you!';
@@ -19,24 +19,22 @@ const Share = () => {
           // const shareText = `Check out your birth ppm! What's yours?`;
           // const smsLink = `sms:?&body=${encodeURIComponent(shareText)}`;
           // window.open(smsLink);
-  };
+//   };
 
+//   return (
+//     <>
+//       <Button
+//         sx={{ width: "fit-content", fontSize: "1rem", bgcolor: 'navy', color: 'white', marginTop: '30px', '&:hover': { bgcolor: 'lightBlue' } }}
+//         onClick={handleContact}
+//       >
+//         Share with a Friend
+//       </Button>
 
+//     </>
+//   )
+// }
 
-  return (
-    <>
-      <Button
-        sx={{ width: "fit-content", fontSize: "1rem", bgcolor: 'navy', color: 'white', marginTop: '30px', '&:hover': { bgcolor: 'lightBlue' } }}
-        onClick={handleContact}
-      >
-        Share with a Friend
-      </Button>
-
-    </>
-  )
-}
-
-export default Share;
+// export default Share;
 
 
 

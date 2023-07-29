@@ -34,7 +34,7 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
 
   return (
     <>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{padding: '35px'}}>
         {trail.map((props, index) => (
           <Grid item xs={3} key={index}>
             <animated.div
