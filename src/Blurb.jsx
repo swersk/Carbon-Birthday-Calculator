@@ -2,15 +2,15 @@ const Blurb = () => {
 
   return (
     <>
-      <div>
+      <div style={{marginTop: '15px'}}>
         <br />
-        <div className="carbonWrapper">
+        <div className="carbonWrapper" >
           <p style={{
-            marginTop: '12px',
+            marginTop: '15px',
             fontSize: '0.9rem'
           }}><em>Carbon dioxide in the atmosphere is measured in parts per million (ppm).< br /> Yearly average carbon figures come from Hawaii, the South Pole and Antarctica. </em></p>
         </div>
-        <div>
+        <div style={{marginTop: '20px'}}>
           <h1 style={{ textAlign: "center", marginBottom: '10px' }}>Learn more</h1>
           <div className="video">
             <iframe
