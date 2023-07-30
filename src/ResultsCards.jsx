@@ -49,6 +49,7 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
+                borderBottom: '1px solid #287AB8'
               }}
             >
               <Typography  variant="h5" align="center" sx={{ fontSize: '1.5rem', mb: '8px' }}>

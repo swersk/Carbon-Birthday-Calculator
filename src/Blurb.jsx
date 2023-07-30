@@ -7,8 +7,8 @@ const Blurb = () => {
         <div className="carbonWrapper" >
           <p style={{
             marginTop: '15px',
-            fontSize: '0.9rem'
-          }}><em>Carbon dioxide in the atmosphere is measured in parts per million (ppm).< br /> Yearly average carbon figures come from Hawaii, the South Pole and Antarctica. </em></p>
+            fontSize: '1rem'
+          }}><em>Measurements are gathered from South Pole and the Mauna Loa Observatory in Hawaii. </em></p>
         </div>
         <div style={{marginTop: '20px'}}>
           <h1 style={{ textAlign: "center", marginBottom: '10px' }}>Learn more</h1>
@@ -24,8 +24,7 @@ const Blurb = () => {
           </div>
         </div>
         <div>
-          <span className="footer" style={{ maxWidth: '100%' }}><small><br />Results from dataset are pulled from https://data.giss.nasa.gov/modelforce/ghgases/Fig1A.ext.txt. Dataset was also used for 2000-2011, with NOAA/ESRL trends added to 2003 data. De-seasonalized values were used for August of the given year to calculate for birth years 2012-2020.</small><br />
-            <br /></span>
+          <span className="footer" style={{ maxWidth: '100%' }}><small><br />Dataset: https://data.giss.nasa.gov/modelforce/ghgases/Fig1A.ext.txt.<br />*ppm = parts per million. <br /></small></span>
         </div>
       </div>
     </>
