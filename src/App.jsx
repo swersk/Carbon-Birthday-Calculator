@@ -10,7 +10,7 @@ import { Button, Typography, MenuItem, Select, FormControl, Container, Box } fro
 import Confetti from 'react-confetti';
 import ResultsCards from './ResultsCards';
 import { animated } from 'react-spring';
-import { useWindowSize } from 'react-use';
+import useWindowSize from 'react-use/lib/useWindowSize';
 import { useTheme } from '@mui/material/styles';
 
 const App = () => {
