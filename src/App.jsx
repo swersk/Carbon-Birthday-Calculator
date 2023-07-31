@@ -297,7 +297,7 @@ const App = () => {
                 ref={headingRef} //where the confetti source is
                 className="results"
                 variant="h4"
-                sx={{ textAlign: 'center', pt: '20px', pb: '20px', mt: '50px' }}
+                sx={{ textAlign: 'center', pt: '20px', pb: '20px', mt: '50px', fontSize: '22x' }}
               >
                 Your Results
               </Typography>

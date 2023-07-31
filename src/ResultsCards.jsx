@@ -12,7 +12,6 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
   });
 
   useEffect(() => {
-
     const handleScroll = () => {
       setIsMobileScrolling(window.innerWidth <= 600 && window.scrollY > 0);
     };
@@ -50,10 +49,9 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
 
   return (
     <>
-
-      <Grid container spacing={2} sx={{ padding: '35px' }}>
+      <Grid container spacing={3} sx={{ padding: '5px', margin: '0' }}>
         {trail.map((props, index) => (
-          <Grid  className="card" item xs={12} sm={6} md={3} key={index}>
+          <Grid  className="card" item xs={12} sm={6} md={3} key={index} sx={{ width: '100%'}}>
             <animated.div
               style={{
                 ...props,
@@ -67,22 +65,21 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
                 borderBottom: '1px solid #287AB8'
               }}
             >
-              <Typography  variant="h5" align="center" sx={{ fontSize: '1.5rem', mb: '8px' }}>
+              <Typography  variant="h5" align="center" sx={{ fontSize: '18px', mb: '8px' }}>
                 {cardData[index].title}
               </Typography>
               <Typography component="span" variant="h5"
                className={`metrics-text ${isMobileScrolling ? 'red-text' : ''}`}
                 sx={{
                   fontWeight: 700,
-                  fontSize: '2rem',
-                  textAlign: 'center',
+                  fontSize: '40px',
                   textAlign: 'center',
                   position: 'relative',
                   backgroundImage: 'linear-gradient(to right, red, red 50%, #000 50%)',
                   backgroundSize: '200% 100%',
                   backgroundPosition: '-100%',
                   display: 'inline-block',
-                  padding: '5px 0',
+
                   '-webkit-background-clip': 'text',
                   '-webkit-text-fill-color': 'transparent',
                   transition: 'all 0.3s ease-in-out',
@@ -107,8 +104,23 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
               >
                 {cardData[index].value}
               </Typography>
-              <Typography variant="h5" align="center" sx={{ fontSize: '1.5rem', mt: '8px' }}>
-                {cardData[index].subtitle}
+              <Typography variant="h5" align="center" sx={{ fontSize: '18px', mt: '8px' }}>
+                {cardData[index].subtitle.split('before').map((part, i, arr) =>
+                  i === 1 ? (
+                    arr[1] === '' ? (
+                      <b key={i}>before</b>
+                    ) : (
+                      <React.Fragment key={i}>
+                        <b>before</b>
+                        {part}
+                      </React.Fragment>
+                    )
+                  ) : (
+                    <React.Fragment key={i}>
+                      {part}
+                    </React.Fragment>
+                  )
+                )}
               </Typography>
             </animated.div>
           </Grid>

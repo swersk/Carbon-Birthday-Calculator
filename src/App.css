@@ -26,18 +26,16 @@ div.carbonWrapper {
   display: flex;
   text-align: center;
   align-items: center;
+
 }
 
-@media (max-width: 600px) {
-  div.carbonWrapper {
-    height: 250px; /* Height for mobile screens */
-  }
-}
-
-@media (max-width: 600px) {
-  .card {
-    padding-bottom: 20px;
-  }
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0;
 }
 
 p {
@@ -72,5 +70,16 @@ p {
   color: red;
 }
 
+/* mobile */
 
+@media (max-width: 600px) {
+  div.carbonWrapper {
+    height: 250px;
+  }
+}
 
+@media (max-width: 600px) {
+  .card {
+    padding-bottom: 20px;
+  }
+}
