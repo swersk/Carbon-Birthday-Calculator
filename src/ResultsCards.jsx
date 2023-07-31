@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Grid } from '@mui/material';
-import { useTrail, animated } from 'react-spring';
+import { useTrail, animated, config } from 'react-spring';
 
 const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
 
