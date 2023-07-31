@@ -46,7 +46,8 @@ const App = () => {
   let months = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
 
-  let obj = {
+
+    let obj = {
     1959: 21.38,
     1960: 22.17,
     1961: 22.43,

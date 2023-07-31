@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Grid } from '@mui/material';
 import { useTrail, animated } from 'react-spring';
 
 const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
 
-  // Create an array of styles for each card
+  const [isMobileScrolling, setIsMobileScrolling] = useState(false);
+
   const trail = useTrail(4, {
     from: { opacity: 0, transform: 'translateY(-20px)' },
     to: { opacity: 1, transform: 'translateY(0)' },
   });
+
+  useEffect(() => {
+
+    const handleScroll = () => {
+      setIsMobileScrolling(window.innerWidth <= 600 && window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const cardData = [
     {
@@ -56,6 +71,7 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
                 {cardData[index].title}
               </Typography>
               <Typography component="span" variant="h5"
+               className={`metrics-text ${isMobileScrolling ? 'red-text' : ''}`}
                 sx={{
                   fontWeight: 700,
                   fontSize: '2rem',
