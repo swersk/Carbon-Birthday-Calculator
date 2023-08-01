@@ -2,17 +2,17 @@ const Blurb = () => {
 
   return (
     <>
-      <div style={{marginTop: '30px', textAlign: 'center'}}>
+      <div style={{marginTop: '15px', textAlign: 'center'}}>
         <br />
 
         <div className="carbonWrapper" >
           <p style={{
             marginTop: '15px',
             fontSize: '1rem'
-          }}><em>*ppm = parts per million.<br />Measurements are gathered from South Pole and the Mauna Loa Observatory in Hawaii. </em></p>
+          }}><em>*ppm = parts per million.<br /><br />Measurements are gathered from South Pole and the Mauna Loa Observatory in Hawaii. </em></p>
         </div>
 
-        <div style={{marginTop: '30px'}}>
+        <div style={{marginTop: '68px'}}>
           <h1 style={{ textAlign: "center", marginBottom: '10px' }}>Learn more</h1>
           <div className="video">
             <iframe
@@ -25,8 +25,8 @@ const Blurb = () => {
             />
           </div>
         </div>
-        <div>
-          <span className="footer" style={{ maxWidth: '100%' }}><small><br />Dataset: https://data.giss.nasa.gov/modelforce/ghgases/Fig1A.ext.txt.<br /> <br /></small></span>
+        <div style={{ maxWidth: '100%', marginTop: '10px' }}>
+          <span className="footer" ><small><br />Dataset: https://data.giss.nasa.gov/modelforce/ghgases/Fig1A.ext.txt.<br /> <br /></small></span>
         </div>
       </div>
     </>
