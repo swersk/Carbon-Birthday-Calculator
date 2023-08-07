@@ -329,7 +329,7 @@ const App = () => {
             <animated.div>
               <Typography
                 id="your-results"
-                ref={headingRef} //where the confetti source is
+                ref={headingRef} // Where the confetti source is
                 className="results"
                 variant="h4"
                 sx={{

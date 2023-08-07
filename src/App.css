@@ -17,7 +17,6 @@
   color: #61dafb;
 }
 
-
 /* cards */
 
 .card {
@@ -32,7 +31,6 @@
 .red-text {
   color: rgb(97, 24, 24);
 }
-
 
 /* bottom blurb */
 
@@ -50,7 +48,8 @@ p {
   text-align: center;
   font-size: 17px;
   color: black;
-  font-family: 'Chronicle Text G2 A', 'Chronicle Text G2 B', 'Chronicle Text G2', Georgia, serif;
+  font-family: "Chronicle Text G2 A", "Chronicle Text G2 B", "Chronicle Text G2",
+    Georgia, serif;
   font-weight: normal;
   line-height: 30px;
 }
@@ -68,14 +67,13 @@ div.carbonWrapper {
 
 .footer {
   font-size: 17px;
-  font-family: 'Chronicle Text G2 A', 'Chronicle Text G2 B', 'Chronicle Text G2', Georgia, serif;
+  font-family: "Chronicle Text G2 A", "Chronicle Text G2 B", "Chronicle Text G2",
+    Georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   max-width: 300px;
   line-height: 30px;
 }
-
-
 
 /* mobile */
 
@@ -90,5 +88,3 @@ div.carbonWrapper {
     margin-top: 20px;
   }
 }
-
-

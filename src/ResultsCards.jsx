@@ -17,7 +17,7 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // Clean up the event listener on component unmount
+    // Cleans up the event listener on component unmount
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -50,8 +50,6 @@ const ResultsCards = ({ month, year, avg, increase, difference, trend }) => {
   return (
     <>
       <Grid
-        container
-        container
         sx={{ padding: "50px", "& > div": { padding: "10px" } }}
       >
         {trail.map((props, index) => (
