@@ -1,6 +1,6 @@
 # Carbon Birth Calculator
 
-Find the CO2 ppm metric from your birthday! Utilizing datasets from climate.nasa.gov and data.giss.nasa.gov, this app provides insight into carbon trends throughout your lifetime.
+Find yourt birth CO2 ppm metric and subsequent trends! Utilizing datasets from climate.nasa.gov and data.giss.nasa.gov, this app provides insight into carbon trends throughout your lifetime.
 
 ### About
 I created functions leveraging extracted data to generate personalized metrics based on your birth information.
