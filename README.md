@@ -4,7 +4,7 @@ Discover climate information based on your birthday! Utilizing datasets from cli
 
 ### Features
 
-• Input your birthday to determine the corresponding carbon dioxide concentration for that period.</br>
+• Input your birthday to determine the corresponding carbon dioxide (CO2) concentration for that period.</br>
 • Understand the rise in CO2 levels over your lifetime with clear, simple metrics.
 
 👉 [Find your carbon birth number](https://carbon-drab.vercel.app/)
